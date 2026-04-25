@@ -3108,7 +3108,7 @@ public final class MysqlErrorNumbers {
     public final static int ER_IB_MSG_1273 = 13183; // [HY000] %s
     public final static int ER_PID_FILEPATH_LOCATIONS_INACCESSIBLE = 13184; // [HY000] One or several locations were inaccessible while checking PID filepath.
     public final static int ER_UNKNOWN_VARIABLE_IN_PERSISTED_CONFIG_FILE = 13185; // [HY000] Currently unknown variable '%s' was read from the persisted conf...
-    public final static int ER_FAILED_TO_HANDLE_DEFAULTS_FILE = 13186; // [HY000] Fatal error in defaults handling. Program aborted!
+    public final static int ER_FAILED_TO_HANDLE_DEFAULTS_FILE = 13186; // [HY000] Fatal error in defaults handling. application.Program aborted!
     public final static int ER_DUPLICATE_SYS_VAR = 13187; // [HY000] Duplicate variable name '%s'.
     public final static int ER_FAILED_TO_INIT_SYS_VAR = 13188; // [HY000] Failed to initialize system variables.
     public final static int ER_SYS_VAR_NOT_FOUND = 13189; // [HY000] Variable name '%s' not found.
