@@ -36,6 +36,40 @@ public class SellerDaoJDBC implements SellerDao {
     public void deleteById(Integer id) {
 
     }
+    @Override
+    public List<Seller> findAll() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn.prepareStatement("SELECT seller.*,department.Name as DepName " +
+                    "FROM seller INNER JOIN department " +
+                    "ON seller.DepartmentId = department.Id " +
+                    "ORDER BY Name");
+
+            rs = st.executeQuery();
+            List<Seller> list = new ArrayList<>();
+
+            Map<Integer,Department> map = new HashMap<>();
+
+            while (rs.next()){
+
+                Department dep = map.get(rs.getInt("DepartmentId"));
+                if(dep == null){
+                    dep = instatiateDepartment(rs);
+                    map.put(rs.getInt("DepartmentId"), dep);
+                }
+                Seller obj = instatiateSeller(rs,dep);
+                list.add(obj);
+                //Sellers apontado para um mesmo departamento, em vez 2 apontam para 1 departamento.
+            }
+            return  list;
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
 
     @Override
     public Seller findById(Integer id) {// busca por id
@@ -81,10 +115,6 @@ public class SellerDaoJDBC implements SellerDao {
         return dep;
     }
 
-    @Override
-    public List<Seller> findAll() {
-        return List.of();
-    }
 
     @Override
     public List<Seller> findByDepartment(Department department) {
